@@ -1,0 +1,3 @@
+#CentOS Dependencies
+python-devel
+mysql-devel
