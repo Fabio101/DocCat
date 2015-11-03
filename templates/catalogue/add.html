@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block jumbotron %}
+<div class="jumbotron">
+
+	<h1>{{ title }}</h1>
+
+</div>
+{% endblock %}	
+
+{% block content %}
+<div class="row-fluid">
+<div class="col-md-6">
+	<form class="form-horizontal" method='POST' action=''>{% csrf_token %}
+		{{ form|crispy }}
+		<input class="btn btn-lg btn-primary" type='submit' value="{{ submit_label }}" />
+	</form>
+</div>
+</div>
+{% endblock %}

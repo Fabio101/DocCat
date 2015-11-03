@@ -1,1 +1,2 @@
 MySQL-python
+django-crispy-forms

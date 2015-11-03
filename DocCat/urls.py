@@ -9,5 +9,5 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
 
     #Catalogue URL's
-    url(r'^home/', 'catalogue.views.home', name='home'),
+    url(r'^add/', 'catalogue.views.add', name='add'),
 ]

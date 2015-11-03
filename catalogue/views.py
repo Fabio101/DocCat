@@ -3,11 +3,11 @@ from .forms import CatalogueForm
 
 # Create your views here.
 
-def home(request):
+def add(request):
 	
 	#context variables
-	title = "Document Catalogues"
-	submit_label = "Add Catalogue"
+	title = "Add Catalogue"
+	submit_label = "Add"
 	form = CatalogueForm(request.POST or None)
 
 	context = {
@@ -22,7 +22,7 @@ def home(request):
 
 		context = {
 			"title": "Thank you",
-			"submit_label": "Add Another Catalogue"
+			"submit_label": "Add More"
 		}
 
-	return render(request, "catalogue/home.html", context)
+	return render(request, "catalogue/add.html", context)
