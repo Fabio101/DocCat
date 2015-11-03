@@ -1,28 +1,35 @@
 from django.shortcuts import render
-from .forms import CatalogueForm
+from .forms import AddCatalogueForm
 
 # Create your views here.
 
 def add(request):
-	
 	#context variables
-	title = "Add Catalogue"
-	submit_label = "Add"
-	form = CatalogueForm(request.POST or None)
+	form = AddCatalogueForm(request.POST or None)
 
 	context = {
-                "title": title,
-		"submit_label": submit_label,
+                "title": "Add Catalogue",
+		"submit_label": "Add",
                 "form": form,
         }
 
 	if form.is_valid():
-		formData = form.save(commit=False)
-		formData.save()
+		try:
+			#Save form data
+			form.save()
 
-		context = {
-			"title": "Thank you",
-			"submit_label": "Add More"
-		}
+			#Set new context
+			context = {
+				"title": "Catalogue Created",
+				"submit_label": "Add More",
+			}
+
+		except Exception, e:
+			#Display expection in new context
+			context = {
+                                "title": "Error",
+				"error": str(e),
+                                "submit_label": "Try Again",
+                        }
 
 	return render(request, "catalogue/add.html", context)
