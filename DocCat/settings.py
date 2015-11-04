@@ -37,8 +37,10 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     #Third Party Apps
     'crispy_forms',
+    'registration',
     #Project Related Apps
     'catalogue',
 )
@@ -110,3 +112,10 @@ STATIC_URL = '/static/'
 
 #Cripsy forms options
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
+
+#Registration Redux settings
+ACCOUNT_ACTIVATION_DAYS = 7
+REGISTRATION_AUTO_LOGIN = True
+LOGIN_REDIRECT_URL = '/'
+
+SITE_ID = 1

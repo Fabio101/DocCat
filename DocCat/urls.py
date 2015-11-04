@@ -11,6 +11,9 @@ urlpatterns = [
     #home page
     url(r'^$', 'home.views.home', name='home'),
 
+    #Registration and Login
+    url(r'^accounts/', include('registration.backends.default.urls')),
+
     #Catalogue URL's
     url(r'^add/', 'catalogue.views.add', name='add'),
 ]

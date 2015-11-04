@@ -42,7 +42,12 @@
             </li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="../navbar/">Login</a></li>
+	  {% if request.user.is_authenticated %}
+            <li><a href="{% url 'auth_logout' %}">Logout</a></li>
+	  {% else %}
+	    <li><a href="{% url 'registration_register' %}">Register</a></li>
+	    <li><a href="{% url 'auth_login' %}">Login</a></li>
+	  {% endif %}
           </ul>
         </div><!--/.nav-collapse -->
       </div>

@@ -1,2 +1,3 @@
 MySQL-python
 django-crispy-forms
+django-registration-redux
