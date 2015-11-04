@@ -8,6 +8,9 @@ urlpatterns = [
 
     url(r'^admin/', include(admin.site.urls)),
 
+    #home page
+    url(r'^$', 'home.views.home', name='home'),
+
     #Catalogue URL's
     url(r'^add/', 'catalogue.views.add', name='add'),
 ]

@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block jumbotron %}
+<div class="jumbotron">
+
+	<h1>{{ title }}</h1>
+
+</div>
+{% endblock %}	
+
+{% block content %}
+<div class="row-fluid">
+
+<div class="col-md-3">
+<h2>{{ article1_title  }}</h2>
+{{ article1_data }}
+</div>
+
+<div class="col-md-3">
+<h2>{{ article2_title }}</h2>
+{{ article2_data }}
+</div>
+
+<div class="col-md-3">
+<h2>{{ article3_title }}</h2>
+{{ article3_data }}
+</div>
+
+<div class="col-md-3">
+<h2>{{ article4_title }}</h2>
+{{ article4_data }}
+</div>
+
+</div>
+{% endblock %}
