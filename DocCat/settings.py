@@ -27,6 +27,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+#Email Host
+EMAIL_HOST = 'localhost'
+EMAIL_PORT = 25
 
 # Application definition
 
@@ -43,6 +46,7 @@ INSTALLED_APPS = (
     'registration',
     #Project Related Apps
     'catalogue',
+    'document',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -109,6 +113,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
+
+#Upload Media root 
+MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
+MEDIA_URL = '/uploads/'
 
 #Cripsy forms options
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
