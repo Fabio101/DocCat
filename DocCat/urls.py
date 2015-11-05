@@ -15,5 +15,9 @@ urlpatterns = [
     url(r'^accounts/', include('registration.backends.default.urls')),
 
     #Catalogue URL's
-    url(r'^add/', 'catalogue.views.add', name='add'),
+    url(r'^add_cat/', 'catalogue.views.add', name='add_cat'),
+
+    #Document URLS's
+    url(r'^add_doc/', 'document.views.add', name='add_doc'),
+    url(r'^list_doc/', 'document.views.list', name='list_doc'),
 ]
