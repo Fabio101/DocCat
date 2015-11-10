@@ -4,15 +4,14 @@
 <div class="row-fluid">
 {% block content %}
 <div class="col-md-5 col-md-offset-1">
-	<table style="width:100% ; border-collapse: separate; border-spacing: 0 5px;">
-		<col width="100">
-                <col width="250">
+	<table class="col-md-12" style="width:100%; border-collapse: separate; border-spacing: 0 5px;">
+		<col width="90">
+                <col width="200">
 		<tr>
 			<th><h3><b>Name</b></h3></th>
 			<th><h3><b>Actions</b></h3></th>
 		</tr>
 		<tr>
-		<td><hr></td><td><hr></td>
 		</tr>
 		{% for catalogue in catalogues.object_list %}
 		<tr>

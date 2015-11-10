@@ -58,7 +58,7 @@ def CatList(request):
                 relatedCats = Catalogue.objects.all().order_by('name')
 
                 #Setup Pagination
-                paginator = Paginator(relatedCats, 5)
+                paginator = Paginator(relatedCats, 6)
 
                 #Check if a page number exists, if not set to page 1
                 try:

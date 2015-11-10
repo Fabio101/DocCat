@@ -91,7 +91,7 @@ def DocList(request):
 		relatedDocs = Document.objects.filter(catalogue = catalogueID).order_by('name')
 
 		#Setup Pagination
-		paginator = Paginator(relatedDocs, 5)
+		paginator = Paginator(relatedDocs, 6)
 
 		#Check if a page number exists, if not set to page 1
 		try:
