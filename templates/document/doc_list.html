@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+<div class="row-fluid">
+{% block content %}
+<div class="col-md-5 col-md-offset-1">
+	<table style="width:100% ; border-collapse: separate; border-spacing: 0 5px;">
+		<tr>
+			<th><h3><b>Name</b></h3></th>
+			<th><h3><b>Download</b></h3></th>
+			<th><h3><b>Actions</b></h3></th>
+		</tr>
+		<tr>
+		<td><hr></td><td><hr></td><td><hr></td><td><hr></td>
+		</tr>
+		{% for document in documents.object_list %}
+		<tr>
+			<td>{{ document.name }}</td><td><a href="/uploads/{{ document.document }}">Link</a></td><td><button class="btn btn-primary" type="button">Edit</button>&nbsp;<button class="btn btn-danger" type="button">Delete</button></td>
+		</tr>
+		{% endfor %}
+	</table>
+<nav>
+<ul class="pagination">
+	{% if documents.has_previous %}
+              <li><a href="?page={{ documents.previous_page_number }}">Previous</a></li>
+          {% endif %}
+          {% for pg in documents.paginator.page_range %}
+              {% if documents.number == pg %}
+                  <li class="active"><a href="?page={{ pg }}">{{ pg }}</a></li>
+              {% else %}
+                  <li><a href="?page={{ pg }}">{{ pg }}</a></li>
+              {% endif %}
+          {% endfor %}
+          {% if documents.has_next %}
+              <li><a href="?page={{ documents.next_page_number }}">Next</a></li>
+          {% endif %}
+</ul>
+</nav>
+{% endblock %}
+{% block jumbotron %}
+        <div class="jumbotron col-md-6">
+                <h1><b>{{ title }}</b></h1>
+                <h3>{{ title_content1 }}</h3>
+                <hr>
+                <p><i>{{ title_content2 }}</i></p>
+        </div>
+{% endblock %}
+</div>

@@ -19,5 +19,6 @@ urlpatterns = [
 
     #Document URLS's
     url(r'^add_doc/', 'document.views.add', name='add_doc'),
-    url(r'^list_doc/', 'document.views.list', name='list_doc'),
+    url(r'^list_doc/', 'document.views.DocList', name='list_doc'),
+    url(r'^list_cat_doc', 'document.views.CatList', name='list_cat_doc'),
 ]
