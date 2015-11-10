@@ -48,4 +48,4 @@ def add(request):
 
 		return render(request, "catalogue/add.html", context)
 	else:
-		return render(request, "catalogue/unauthorized.html", {})
+		return render(request, "unauthorized.html", {})

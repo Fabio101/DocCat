@@ -52,7 +52,7 @@ def add(request):
 
                 return render(request, "document/add.html", context)
         else:
-                return render(request, "document/unauthorized.html", {})
+                return render(request, "unauthorized.html", {})
 
 def CatList(request):
 	if request.user.is_authenticated():
