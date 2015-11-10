@@ -88,10 +88,10 @@ def DocList(request):
 			catalogueID = request.session['catalogueID']	
 
 		#Get List of Documents using the session catalogue ID
-		relatedDocs = Document.objects.filter(catalogue = catalogueID)
+		relatedDocs = Document.objects.filter(catalogue = catalogueID).order_by('name')
 
 		#Setup Pagination
-		paginator = Paginator(relatedDocs, 10)
+		paginator = Paginator(relatedDocs, 5)
 
 		#Check if a page number exists, if not set to page 1
 		try:
