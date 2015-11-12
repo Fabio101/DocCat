@@ -15,7 +15,7 @@
 		</tr>
 		{% for catalogue in catalogues.object_list %}
 		<tr>
-			<td><b>{{ catalogue.name }}</b></td><td><button class="btn btn-success" type="button">Documents</button>&nbsp;<button class="btn btn-primary" type="button">Edit</button>&nbsp;<button class="btn btn-danger" type="button">Delete</button></td>
+			<td><b>{{ catalogue.name }}</b></td><td><a class="btn btn-success" href="/list_doc?catalogueID={{ catalogue.id  }}" type="button">Documents</a>&nbsp;<button class="btn btn-primary" type="button">Edit</button>&nbsp;<button class="btn btn-danger" type="button">Delete</button></td>
 		</tr>
 		{% endfor %}
 	</table>

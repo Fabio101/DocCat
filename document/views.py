@@ -84,8 +84,11 @@ def DocList(request):
 		if request.POST:
 			catalogueID = request.POST['Catalogue']
 			request.session['catalogueID'] = catalogueID
+		elif request.GET and 'catalogueID' in request.GET:
+			catalogueID = request.GET.get('catalogueID')
+			request.session['catalogueID'] = catalogueID
 		else:
-			catalogueID = request.session['catalogueID']	
+			catalogueID = request.session['catalogueID']
 
 		#Get List of Documents using the session catalogue ID
 		relatedDocs = Document.objects.filter(catalogue = catalogueID).order_by('name')
@@ -107,7 +110,7 @@ def DocList(request):
 
 		title = "Documents"
                	title_content1 = "This area allows you to view and download your documents."
-               	title_content2 = "You may also modify or delete documents."
+               	title_content2 = "You may also modify or delete documents from this listing. "
 
 		#Context Data
                	context = {
