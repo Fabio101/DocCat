@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect
 from django.core.paginator import Paginator, EmptyPage, InvalidPage
+from django.http import HttpResponse
+from django.conf import settings
 from catalogue.models import Catalogue
 from .forms import ListDocumentForm
 from .forms import AddDocumentForm
@@ -10,17 +12,30 @@ from .models import Document
 def add(request):
         if request.user.is_authenticated():
 
+		if request.GET and 'documentID' in request.GET:
+                        documentID = request.GET.get('documentID')
+                        document = Document.objects.get(id = documentID)
+
+                        #We load the instance of the catalogue into the form to edit the fields
+                        form = AddDocumentForm(request.POST or None, initial={'name': document.name, 'catalogue': document.catalogue, 'description': document.description, 'document': document.document}, instance=document)
+                        title = "Edit Document"
+                        button = "Edit"
+                        status = "Modified"
+                else:
+                        form = AddCatalogueForm(request.POST or None)
+                        title = "Add Document"
+                        button = "Add"
+                        status = "Added"
+
                 #context variables
-                form = AddDocumentForm(request.POST or None, request.FILES or None)
-                title = "Add Document"
-                title_content1 = "This area allows you to add new documents to a catalogue."
+                title_content1 = "This area allows you to " + button + " documents to a catalogue."
                 title_content2 = "There is no limit to the number of Documents one can upload."
 
                 context = {
                         "title": title,
                         "title_content1": title_content1,
                         "title_content2": title_content2,
-                        "button": "Add",
+                        "button": button,
                         "form": form,
                 }
 
@@ -30,13 +45,13 @@ def add(request):
                                 form.save()
 
                                 #Set new context
-                                title_content2 = "You can continue to add more Documents."
+                                title_content2 = "You can continue to " + button + " more Documents."
 
                                 context = {
                                         "title": title,
                                         "title_content2" : title_content2,
-                                        "status": '<div class="alert alert-success" role="alert">Successfully Added Document!</div>',
-                                        "button": "Add More",
+                                        "status": '<div class="alert alert-success" role="alert">Successfully ' + status + ' Document!</div>',
+                                        "button": button + " More",
                                 }
 
                         except Exception, e:
@@ -68,6 +83,22 @@ def delete(request):
 
                         #We just go back to the Document list from here passing the cat ID in GET.
                         return redirect('document.views.DocList')
+        else:
+                return render(request, "unauthorized.html", {})
+
+def download(request):
+	if request.user.is_authenticated():
+
+		if request.GET and 'fileName' in request.GET:
+
+			fileName = request.GET.get('fileName')
+
+			path = settings.MEDIA_ROOT +'/'+ fileName
+
+			response = HttpResponse(path, content_type= None)
+			response['Content-Disposition'] = 'attachment; filename='+fileName
+
+                	return response
         else:
                 return render(request, "unauthorized.html", {})
 
