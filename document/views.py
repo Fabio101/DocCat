@@ -22,7 +22,7 @@ def add(request):
                         button = "Edit"
                         status = "Modified"
                 else:
-                        form = AddCatalogueForm(request.POST or None)
+                        form = AddDocumentForm(request.POST or None)
                         title = "Add Document"
                         button = "Add"
                         status = "Added"
