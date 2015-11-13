@@ -14,4 +14,4 @@ class AddDocumentForm(forms.ModelForm):
 		self.fields['catalogue'] = forms.ModelChoiceField(queryset=Catalogue.objects.all().order_by('name'))
 
 class ListDocumentForm(forms.Form):
-	Catalogue = forms.ModelChoiceField(queryset=Catalogue.objects.all().order_by('name'))
+	Catalogue = forms.ModelChoiceField(queryset=Catalogue.objects.all().order_by('name'), empty_label=None)
