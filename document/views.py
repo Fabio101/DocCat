@@ -17,12 +17,12 @@ def add(request):
                         document = Document.objects.get(id = documentID)
 
                         #We load the instance of the catalogue into the form to edit the fields
-                        form = AddDocumentForm(request.POST or None, initial={'name': document.name, 'catalogue': document.catalogue, 'description': document.description, 'document': document.document}, instance=document)
+                        form = AddDocumentForm(request.POST or None, request.FILES or None, initial={'name': document.name, 'catalogue': document.catalogue, 'description': document.description, 'document': document.document}, instance=document)
                         title = "Edit Document"
                         button = "Edit"
                         status = "Modified"
                 else:
-                        form = AddDocumentForm(request.POST or None)
+                        form = AddDocumentForm(request.POST or None, request.FILES or None)
                         title = "Add Document"
                         button = "Add"
                         status = "Added"
