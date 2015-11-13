@@ -8,9 +8,21 @@ from .forms import AddCatalogueForm
 def add(request):
 	if request.user.is_authenticated():
 
-		#context variables
-		form = AddCatalogueForm(request.POST or None)
-		title = "Add Catalogue"
+		if request.GET and 'catalogueID' in request.GET:
+                	catalogueID = request.GET.get('catalogueID')
+			catalogue = Catalogue.objects.get(id = catalogueID)
+			
+			form = AddCatalogueForm(request.POST or None, initial={'name': catalogue.name, 'description': catalogue.description}, instance=catalogue)
+			title = "Edit Catalogue"
+			button = "Edit"
+			status = "Modified"
+		else:
+			form = AddCatalogueForm(request.POST or None)
+			title = "Add Catalogue"
+			button = "Add"
+			status = "Added"
+
+		#context
 		title_content1 = "This area allows you to add new catalogues to your account."
 		title_content2 = "There is no limit to the number of Catalogues one can create."
 
@@ -18,7 +30,7 @@ def add(request):
                 	"title": title,
 			"title_content1": title_content1,
 			"title_content2": title_content2,
-			"button": "Add",
+			"button": button,
                 	"form": form,
         	}
 
@@ -28,13 +40,13 @@ def add(request):
 				form.save()
 
 				#Set new context
-				title_content2 = "You can continue to add more Catalogues."
+				title_content2 = "You can continue to " + button + " more Catalogues."
 
 				context = {
 					"title": title,
 					"title_content2" : title_content2,
-					"status": '<div class="alert alert-success" role="alert">Successfully Added Catalogue!</div>',
-					"button": "Add More",
+					"status": '<div class="alert alert-success" role="alert">Successfully ' + status + ' Catalogue!</div>',
+					"button": button + " More",
 				}
 			
 			except Exception, e:
