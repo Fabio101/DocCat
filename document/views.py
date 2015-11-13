@@ -19,11 +19,13 @@ def add(request):
                         #We load the instance of the catalogue into the form to edit the fields
                         form = AddDocumentForm(request.POST or None, request.FILES or None, initial={'name': document.name, 'catalogue': document.catalogue, 'description': document.description, 'document': document.document}, instance=document)
                         title = "Edit Document"
+			inputType = "submit"
                         button = "Edit"
                         status = "Modified"
                 else:
                         form = AddDocumentForm(request.POST or None, request.FILES or None)
                         title = "Add Document"
+			inputType = "submit"
                         button = "Add"
                         status = "Added"
 
@@ -35,6 +37,7 @@ def add(request):
                         "title": title,
                         "title_content1": title_content1,
                         "title_content2": title_content2,
+			"inputType" : inputType,
                         "button": button,
                         "form": form,
                 }
@@ -47,10 +50,15 @@ def add(request):
                                 #Set new context
                                 title_content2 = "You can continue to " + button + " more Documents."
 
+				#If we have modified a document, we want to redirect back to the document list
+				if status == "Modified":
+					inputType = "hidden"
+
                                 context = {
                                         "title": title,
                                         "title_content2" : title_content2,
                                         "status": '<div class="alert alert-success" role="alert">Successfully ' + status + ' Document!</div>',
+					"inputType": inputType,
                                         "button": button + " More",
                                 }
 
