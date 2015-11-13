@@ -13,6 +13,7 @@ def add(request):
                 	catalogueID = request.GET.get('catalogueID')
 			catalogue = Catalogue.objects.get(id = catalogueID)
 			
+			#We load the instance of the catalogue into the form to edit the fields
 			form = AddCatalogueForm(request.POST or None, initial={'name': catalogue.name, 'description': catalogue.description}, instance=catalogue)
 			title = "Edit Catalogue"
 			button = "Edit"
@@ -70,9 +71,11 @@ def delete(request):
 
 		if request.GET and 'catalogueID' in request.GET:
 			catalogueID = request.GET.get('catalogueID')
-			document = Document.objects.filter(catalogue = catalogueID).delete()
-                        catalogue = Catalogue.objects.filter(id = catalogueID).delete()
+			#We delete the related documents first and then the catalogues due to referential integrity contsraints
+			Document.objects.filter(catalogue = catalogueID).delete()
+                        Catalogue.objects.filter(id = catalogueID).delete()
 			
+			#We just go back to the Catalogue list from here...
 			return redirect('catalogue.views.CatList')
         else:
                 return render(request, "unauthorized.html", {})

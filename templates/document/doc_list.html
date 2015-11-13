@@ -15,7 +15,7 @@
 		</tr>
 		{% for document in documents.object_list %}
 		<tr>
-			<td><b>{{ document.name }}</b></td><td><a href="/uploads/{{ document.document }}" class="btn btn-success" role="button">Download</a>&nbsp;<button class="btn btn-primary" type="button">Edit</button>&nbsp;<button class="btn btn-danger" type="button">Delete</button></td>
+			<td><b>{{ document.name }}</b></td><td><a href="/uploads/{{ document.document }}" class="btn btn-success" role="button">Download</a>&nbsp;<button class="btn btn-primary" type="button">Edit</button>&nbsp;<button class="btn btn-danger" type="button" onclick="confirmDocDeletion('{% url 'del_doc' %}?documentID={{ document.id }}')">Delete</button></td>
 		</tr>
 		{% endfor %}
 	</table>

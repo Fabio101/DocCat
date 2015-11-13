@@ -15,7 +15,7 @@
 		</tr>
 		{% for catalogue in catalogues.object_list %}
 		<tr>
-			<td><b>{{ catalogue.name }}</b></td><td><a href="{% url 'list_doc' %}?catalogueID={{ catalogue.id }}" class="btn btn-success" type="button">Documents</a>&nbsp;<a href="{% url 'add_cat' %}?catalogueID={{ catalogue.id }}" class="btn btn-primary" type="button">Edit</a>&nbsp;<button class="btn btn-danger" type="button" onclick="confirmCatDeletion('{% url 'del_cat' %}?catalogueID={{ catalogue.id }}')">Delete</a></td>
+			<td><b>{{ catalogue.name }}</b></td><td><a href="{% url 'list_doc' %}?catalogueID={{ catalogue.id }}" class="btn btn-success" type="button">Documents</a>&nbsp;<a href="{% url 'add_cat' %}?catalogueID={{ catalogue.id }}" class="btn btn-primary" type="button">Edit</a>&nbsp;<button class="btn btn-danger" type="button" onclick="confirmCatDeletion('{% url 'del_cat' %}?catalogueID={{ catalogue.id }}')">Delete</button></td>
 		</tr>
 		{% endfor %}
 	</table>

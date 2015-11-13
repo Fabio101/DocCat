@@ -94,6 +94,16 @@
                         return false;
                 }
         }
+
+	function confirmDocDeletion(url) {
+                var confirmation = window.confirm('Are you sure you want to delete this document?');
+
+                if(confirmation==true) {
+                        window.location=url; 
+                } else {
+                        return false;
+                }
+        }
 </script>
 </body>
 </html>

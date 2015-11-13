@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.core.paginator import Paginator, EmptyPage, InvalidPage
 from catalogue.models import Catalogue
 from .forms import ListDocumentForm
@@ -51,6 +51,23 @@ def add(request):
                                 }
 
                 return render(request, "document/add.html", context)
+        else:
+                return render(request, "unauthorized.html", {})
+
+def delete(request):
+        if request.user.is_authenticated():
+
+                if request.GET and 'documentID' in request.GET:
+                        documentID = request.GET.get('documentID')
+
+                        #We delete the related documents but need to get the Catalogue ID first, we instanciate a seperate object for this
+			catalogue = Document.objects.filter(id = documentID)[0]
+			catalogueID = catalogue.catalogue
+
+                        Document.objects.filter(id = documentID).delete()
+
+                        #We just go back to the Document list from here passing the cat ID in GET.
+                        return redirect('document.views.DocList')
         else:
                 return render(request, "unauthorized.html", {})
 
