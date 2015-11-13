@@ -83,6 +83,18 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
-  </body>
+<!-- Custom JS functions -->
+<script type='text/javascript'>
+        function confirmCatDeletion(url) {
+                var confirmation = window.confirm('Are you sure you want to delete this catalogue and its associated documents?');
+
+                if(confirmation==true) {
+                        window.location=url; 
+                } else {
+                        return false;
+                }
+        }
+</script>
+</body>
 </html>
 

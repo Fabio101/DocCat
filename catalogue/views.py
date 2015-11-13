@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.core.paginator import Paginator, EmptyPage, InvalidPage
 from .models import Catalogue
+from document.models import Document
 from .forms import AddCatalogueForm
 
 # Create your views here.
@@ -63,6 +64,18 @@ def add(request):
 		return render(request, "catalogue/add.html", context)
 	else:
 		return render(request, "unauthorized.html", {})
+
+def delete(request):
+	if request.user.is_authenticated():
+
+		if request.GET and 'catalogueID' in request.GET:
+			catalogueID = request.GET.get('catalogueID')
+			document = Document.objects.filter(catalogue = catalogueID).delete()
+                        catalogue = Catalogue.objects.filter(id = catalogueID).delete()
+			
+			return redirect('catalogue.views.CatList')
+        else:
+                return render(request, "unauthorized.html", {})
 
 def CatList(request):
         if request.user.is_authenticated():

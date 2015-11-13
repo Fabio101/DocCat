@@ -17,6 +17,7 @@ urlpatterns = [
     #Catalogue URL's
     url(r'^add_cat/', 'catalogue.views.add', name='add_cat'),
     url(r'^list_cat/', 'catalogue.views.CatList', name='list_cat'),
+    url(r'^del_cat/', 'catalogue.views.delete', name='del_cat'),
 
     #Document URLS's
     url(r'^add_doc/', 'document.views.add', name='add_doc'),
