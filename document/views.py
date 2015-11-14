@@ -50,7 +50,7 @@ def add(request):
                                 #Set new context
                                 title_content2 = "You can continue to " + button + " more Documents."
 
-				#If we have modified a document, we want to redirect back to the document list
+				#If we have modified a document, we want the user to return the document list
 				if status == "Modified":
 					inputType = "hidden"
 

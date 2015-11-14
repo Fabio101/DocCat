@@ -89,7 +89,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'DocCat',
         'USER': 'root',
-        'PASSWORD': 'noentry159',
+        'PASSWORD': 'Noentry159!',
         'HOST': 'localhost',
         'PORT': '3306',
     }

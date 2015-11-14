@@ -16,11 +16,13 @@ def add(request):
 			#We load the instance of the catalogue into the form to edit the fields
 			form = AddCatalogueForm(request.POST or None, initial={'name': catalogue.name, 'description': catalogue.description}, instance=catalogue)
 			title = "Edit Catalogue"
+			inputType = "submit"
 			button = "Edit"
 			status = "Modified"
 		else:
 			form = AddCatalogueForm(request.POST or None)
 			title = "Add Catalogue"
+			inputType = "submit"
 			button = "Add"
 			status = "Added"
 
@@ -32,6 +34,7 @@ def add(request):
                 	"title": title,
 			"title_content1": title_content1,
 			"title_content2": title_content2,
+			"inputType": inputType,
 			"button": button,
                 	"form": form,
         	}
@@ -44,10 +47,15 @@ def add(request):
 				#Set new context
 				title_content2 = "You can continue to " + button + " more Catalogues."
 
+				#If we have modified a document, we want the user to return the catalogue list
+                                if status == "Modified":
+                                        inputType = "hidden"
+
 				context = {
 					"title": title,
 					"title_content2" : title_content2,
 					"status": '<div class="alert alert-success" role="alert">Successfully ' + status + ' Catalogue!</div>',
+					"inputType": inputType,
 					"button": button + " More",
 				}
 			
