@@ -7,7 +7,7 @@
 		<form class="form" method='POST' action=''>{% csrf_token %}
 			{{ form|crispy }}
 			{% autoescape off %}{{ status }}{% endautoescape %}
-			<a class="btn btn-lg btn-primary" onclick="window.location.href='{% url "list_cat" %}'">List</a>
+			<a class="btn btn-lg btn-info" onclick="window.location.href='{% url "list_cat" %}'">List</a>
 			<input class="btn btn-lg btn-primary" type='{{ inputType }}' value="{{ button }}" />
 		</form>
 	</div>
