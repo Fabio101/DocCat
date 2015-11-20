@@ -3,19 +3,18 @@
 
 <div class="row-fluid">
 {% block content %}
-<div class="col-md-5 col-md-offset-1">
-	<table class="col-md-12" style="width:105%; border-collapse: separate; border-spacing: 0 5px;">
-		<col width="90">
-                <col width="200">
+<div class="col-md-12">
+	<table class="col-md-12" style="width:100%; border-collapse: separate; border-spacing: 0 5px;">
 		<tr>
 			<th><h3><b>Name</b></h3></th>
+			<th><h3><b>Group</b></h3></th>
 			<th><h3><b>Actions</b></h3></th>
 		</tr>
 		<tr>
 		</tr>
 		{% for catalogue in catalogues.object_list %}
 		<tr>
-			<td><b>{{ catalogue.name }}</b></td><td><a href="{% url 'list_doc' %}?catalogueID={{ catalogue.id }}" class="btn btn-success" type="button">Documents</a>&nbsp;<a href="{% url 'add_cat' %}?catalogueID={{ catalogue.id }}" class="btn btn-primary" type="button">Edit</a>&nbsp;<button class="btn btn-danger" type="button" onclick="confirmCatDeletion('{% url 'del_cat' %}?catalogueID={{ catalogue.id }}')">Delete</button></td>
+			<td><b>{{ catalogue.name }}</b></td><td>{{ catalogue.group }}</td><td><a href="{% url 'list_doc' %}?catalogueID={{ catalogue.id }}" class="btn btn-success" type="button">Documents</a>&nbsp;<a href="{% url 'add_cat' %}?catalogueID={{ catalogue.id }}" class="btn btn-primary" type="button">Edit</a>&nbsp;<button class="btn btn-danger" type="button" onclick="confirmCatDeletion('{% url 'del_cat' %}?catalogueID={{ catalogue.id }}')">Delete</button></td>
 		</tr>
 		{% endfor %}
 	</table>
@@ -38,7 +37,7 @@
 </nav>
 {% endblock %}
 {% block jumbotron %}
-        <div class="jumbotron col-md-6">
+        <div class="jumbotron col-md-12">
                 <h1><b>{{ title }}</b></h1>
                 <h3>{{ title_content1 }}</h3>
                 <hr>

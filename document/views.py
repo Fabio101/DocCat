@@ -12,18 +12,23 @@ from .models import Document
 def add(request):
         if request.user.is_authenticated():
 
+		user = request.user.username
+                userGroup = request.user.groups.get(name = user)
+
+                form = ListDocumentForm(request.POST or None, userGroup = userGroup.id)
+
 		if request.GET and 'documentID' in request.GET:
                         documentID = request.GET.get('documentID')
                         document = Document.objects.get(id = documentID)
 
                         #We load the instance of the catalogue into the form to edit the fields
-                        form = AddDocumentForm(request.POST or None, request.FILES or None, initial={'name': document.name, 'catalogue': document.catalogue, 'description': document.description, 'document': document.document}, instance=document)
+                        form = AddDocumentForm(request.POST or None, request.FILES or None, userGroup = userGroup.id, initial={'name': document.name, 'catalogue': document.catalogue, 'description': document.description, 'document': document.document}, instance=document)
                         title = "Edit Document"
 			inputType = "submit"
                         button = "Edit"
                         status = "Modified"
                 else:
-                        form = AddDocumentForm(request.POST or None, request.FILES or None)
+                        form = AddDocumentForm(request.POST or None, request.FILES or None, userGroup = userGroup.id)
                         title = "Add Document"
 			inputType = "submit"
                         button = "Add"
@@ -44,9 +49,9 @@ def add(request):
 
                 if form.is_valid():
                         try:
-                                #Save form data
+				#Save form data
                                 form.save()
-
+					
                                 #Set new context
                                 title_content2 = "You can continue to " + button + " more Documents."
 
@@ -113,8 +118,11 @@ def download(request):
 def CatList(request):
 	if request.user.is_authenticated():
 
-		form = ListDocumentForm(request.POST or None)
+		user = request.user.username
+		userGroup = request.user.groups.get(name = user)
 
+		form = ListDocumentForm(request.POST or None, userGroup = userGroup.id)
+		
 		title = "Documents"
                 title_content1 = "This area allows you to view and download your documents."
                 title_content2 = "Please select a catalogue from the list to display the revelant documents."
@@ -137,8 +145,8 @@ def DocList(request):
 	if request.user.is_authenticated():
 
 		#We store the catalogue ID into the session if the request was POSTed, if not, we read from the session
-		if request.POST:
-			catalogueID = request.POST['Catalogue']
+		if request.POST and 'catalogues' in request.POST:
+			catalogueID = request.POST.get('catalogues')
 			request.session['catalogueID'] = catalogueID
 		elif request.GET and 'catalogueID' in request.GET:
 			catalogueID = request.GET.get('catalogueID')

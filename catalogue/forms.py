@@ -6,3 +6,4 @@ class AddCatalogueForm(forms.ModelForm):
 	class Meta:
 		model = Catalogue
 		fields = ['name', 'description']
+		exclude = ('group',)

@@ -41,8 +41,10 @@ def add(request):
 
 		if form.is_valid():
 			try:
-				#Save form data
-				form.save()
+				#Save form data to the specific group of the user
+				catalogue = form.save(commit=False)
+				catalogue.group = request.user.groups.get(name = request.user.username)
+				catalogue.save()
 
 				#Set new context
 				title_content2 = "You can continue to " + button + " more Catalogues."
@@ -91,7 +93,9 @@ def delete(request):
 def CatList(request):
         if request.user.is_authenticated():
 
-                relatedCats = Catalogue.objects.all().order_by('name')
+		userGroup = request.user.groups.filter()
+
+                relatedCats = Catalogue.objects.filter(group = userGroup).order_by('name')
 
                 #Setup Pagination
                 paginator = Paginator(relatedCats, 6)
