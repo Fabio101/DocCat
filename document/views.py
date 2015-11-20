@@ -12,23 +12,20 @@ from .models import Document
 def add(request):
         if request.user.is_authenticated():
 
-		user = request.user.username
-                userGroup = request.user.groups.get(name = user)
-
-                form = ListDocumentForm(request.POST or None, userGroup = userGroup.id)
+		userGroup = request.user.groups.filter()
 
 		if request.GET and 'documentID' in request.GET:
                         documentID = request.GET.get('documentID')
                         document = Document.objects.get(id = documentID)
 
                         #We load the instance of the catalogue into the form to edit the fields
-                        form = AddDocumentForm(request.POST or None, request.FILES or None, userGroup = userGroup.id, initial={'name': document.name, 'catalogue': document.catalogue, 'description': document.description, 'document': document.document}, instance=document)
+                        form = AddDocumentForm(request.POST or None, request.FILES or None, userGroup = userGroup, initial={'name': document.name, 'catalogue': document.catalogue, 'description': document.description, 'document': document.document}, instance=document)
                         title = "Edit Document"
 			inputType = "submit"
                         button = "Edit"
                         status = "Modified"
                 else:
-                        form = AddDocumentForm(request.POST or None, request.FILES or None, userGroup = userGroup.id)
+                        form = AddDocumentForm(request.POST or None, request.FILES or None, userGroup = userGroup)
                         title = "Add Document"
 			inputType = "submit"
                         button = "Add"
@@ -118,10 +115,9 @@ def download(request):
 def CatList(request):
 	if request.user.is_authenticated():
 
-		user = request.user.username
-		userGroup = request.user.groups.get(name = user)
+		userGroup = request.user.groups.filter()
 
-		form = ListDocumentForm(request.POST or None, userGroup = userGroup.id)
+		form = ListDocumentForm(request.POST or None, userGroup = userGroup)
 		
 		title = "Documents"
                 title_content1 = "This area allows you to view and download your documents."
